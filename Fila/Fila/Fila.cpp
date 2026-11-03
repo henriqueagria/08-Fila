@@ -93,6 +93,10 @@ void insere()
 
 void remove()
 {
+	if (inicio == NULL) {
+		cout << "Fila vazia!\n";
+		return;
+	}
 
 
 
