@@ -15,6 +15,7 @@ void menu();
 void inicializar();
 void insere();
 void remove();
+void exibir();
 //--------------------------
 
 
@@ -26,14 +27,15 @@ int main()
 void menu()
 {
 	int op = 0;
-	while (op != 4) {
+	while (op != 5) {
 		system("cls"); // somente no windows
 		cout << "Menu Fila";
 		cout << endl << endl;
 		cout << "1 - Inicializar Fila \n";
 		cout << "2 - Inserir elemento \n";
 		cout << "3 - Remover elemento  \n";
-		cout << "4 - Sair \n";
+		cout << "4 - Exibir elementos \n";
+		cout << "5 - Sair \n";
 
 		cout << "Opcao: ";
 		cin >> op;
@@ -46,7 +48,9 @@ void menu()
 			break;
 		case 3: remove();
 			break;
-		case 4:
+		case 4: exibir();
+			break;
+		case 5:
 			return;
 		default:
 			break;
@@ -88,17 +92,58 @@ void insere()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
+	if (inicio == NULL)
+	{
+		inicio = novo;
+		fim = novo;
+
+	}
+	else
+	{
+		fim->prox = novo;
+		fim = novo;
+	}
+
+	cout << "O elemento " << novo->valor
+		<< " foi inserido na fila.\n";
+
 
 }
 
 void remove()
 {
-	if (inicio == NULL) {
-		cout << "Fila vazia!\n";
+	if (inicio == NULL)
+	{
+		cout << "Fila vazia! \n";
 		return;
 	}
+	NO* aux = inicio;
+	cout << "O elemento " << aux->valor
+		<< " foi removido.\n";
+	inicio = inicio->prox;
 
+	if (inicio == NULL)
+	{
+		fim = NULL;
+	}
 
+	free(aux);
 
+}
+
+void exibir()
+{
+	if (inicio == NULL) {
+		cout << "Fila vazia! \n";
+		return;
+	}
+	else {
+		cout << "Elementos: \n";
+		NO* aux = inicio;
+		while (aux != NULL) {
+			cout << aux->valor << endl;
+			aux = aux->prox;
+		}
+	}
 }
 
